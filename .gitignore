@@ -1,0 +1,7 @@
+node_modules/
+.firebase/
+*.log
+.DS_Store
+.env
+public/js/config.js
+public/js/config.local.js

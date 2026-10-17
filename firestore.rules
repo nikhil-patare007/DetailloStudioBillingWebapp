@@ -1,0 +1,20 @@
+rules_version = '2';
+
+// Only the staff accounts listed below can read or write anything.
+// 1. Create each staff user in Firebase Console > Authentication > Users.
+// 2. Put the same email addresses in this list, then run: firebase deploy --only firestore:rules
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isStaff() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'admin@detaillo.com',
+          'nikspatare@gmail.com'
+        ];
+    }
+
+    match /{document=**} {
+      allow read, write: if isStaff();
+    }
+  }
+}
